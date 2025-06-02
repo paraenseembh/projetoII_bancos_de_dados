@@ -110,7 +110,7 @@ CREATE TABLE equipamento (
     CONSTRAINT fk_estado FOREIGN KEY (estado_id) REFERENCES estado_equipamento(id)
 );
 
-CREATE TABLE emprestimo(
+CREATE TABLE emprestimo (
     id INT PRIMARY KEY AUTO_INCREMENT,
     funcionario_id INT NOT NULL,
     equipamento_cod INT NOT NULL,
@@ -118,7 +118,10 @@ CREATE TABLE emprestimo(
     termo_de_comodato VARCHAR(255),
     data_emprestimo DATE NOT NULL,
     data_limite DATE,
-    data_devolucao DATE
+    data_devolucao DATE,
+    CONSTRAINT fk_funcionario_emprestimo FOREIGN KEY (funcionario_id) REFERENCES funcionario(id),
+    CONSTRAINT fk_equipamento_emprestimo FOREIGN KEY (equipamento_cod) REFERENCES equipamento(cod_patrimonio),
+    CONSTRAINT fk_requisicao_emprestimo FOREIGN KEY (requisicao_id) REFERENCES requisicao_de_equipamento(id)
 );
 
 CREATE TABLE especificacao (
