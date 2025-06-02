@@ -1,0 +1,11 @@
+criando table serviço
+criando table empresa terceirizada
+criando table cargo
+criando table modalidade
+removendo CHANGE COLUMN gerente_id gerente_id INT NOT NULL, (isso faz ser impossível criar setor sem funcionário e funcionário sem setor)
+mudando "prazo" -> "data limite"
+mudando fks (fornecedor, fabricante, empresa_de_assistencia) -> empresa terceirizada
+criando table tipo_equipamento substituindo -> CHECK (tipo IN ("Desktop", "Notebook", "Monitor"))
+criando table disponibilidade_equipamento substituindo -> CHECK (disponibilidade IN ("Em uso", "Em estoque", "Em manutenção"))
+criando table estado_equipamento substituindo -> CHECK (estado IN ("Em bom estado", "Defeituoso", "Descartado"))
+adicionando auto_increment no id de todas as tabelas (exceção equipamento)
