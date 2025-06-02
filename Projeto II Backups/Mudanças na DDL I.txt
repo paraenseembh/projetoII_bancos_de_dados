@@ -9,3 +9,4 @@ criando table tipo_equipamento substituindo -> CHECK (tipo IN ("Desktop", "Noteb
 criando table disponibilidade_equipamento substituindo -> CHECK (disponibilidade IN ("Em uso", "Em estoque", "Em manutenção"))
 criando table estado_equipamento substituindo -> CHECK (estado IN ("Em bom estado", "Defeituoso", "Descartado"))
 adicionando auto_increment no id de todas as tabelas (exceção equipamento)
+adicionando table emprestimo
