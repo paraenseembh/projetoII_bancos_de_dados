@@ -66,7 +66,7 @@ CREATE TABLE requisicao_de_equipamento (
 CREATE TABLE compra (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fornecedor_id INT NOT NULL,
-    nota_fiscal BLOB,
+    nota_fiscal VARCHAR(120),
     data_compra DATE NOT NULL,
     previsao_entrega DATE NOT NULL,
     data_chegada DATE,
