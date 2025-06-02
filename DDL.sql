@@ -66,7 +66,7 @@ CREATE TABLE requisicao_de_equipamento (
 CREATE TABLE compra (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fornecedor_id INT NOT NULL,
-    nota_fiscal VARCHAR(120),
+    nota_fiscal VARCHAR(255),
     data_compra DATE NOT NULL,
     previsao_entrega DATE NOT NULL,
     data_chegada DATE,
@@ -115,7 +115,7 @@ CREATE TABLE emprestimo(
     funcionario_id INT NOT NULL,
     equipamento_cod INT NOT NULL,
     requisicao_id INT NOT NULL,
-    termo_de_comodato VARCHAR(120),
+    termo_de_comodato VARCHAR(255),
     data_emprestimo DATE NOT NULL,
     data_limite DATE,
     data_devolucao DATE
