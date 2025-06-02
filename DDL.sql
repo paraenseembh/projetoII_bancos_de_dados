@@ -86,12 +86,12 @@ CREATE TABLE tipo_equipamento(
 );
 
 CREATE TABLE disponibilidade_equipamento(
-	id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     disponibilidade VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE estado_equipamento(
-	id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(25) NOT NULL
 );
 
@@ -108,6 +108,17 @@ CREATE TABLE equipamento (
     CONSTRAINT fk_tipo FOREIGN KEY (tipo_id) REFERENCES tipo_equipamento(id),
     CONSTRAINT fk_disponibilidade FOREIGN KEY (disponibilidade_id) REFERENCES disponibilidade_equipamento(id),
     CONSTRAINT fk_estado FOREIGN KEY (estado_id) REFERENCES estado_equipamento(id)
+);
+
+CREATE TABLE emprestimo(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    funcionario_id INT NOT NULL,
+    equipamento_cod INT NOT NULL,
+    requisicao_id INT NOT NULL,
+    termo_de_comodato VARCHAR(120),
+    data_emprestimo DATE NOT NULL,
+    data_limite DATE,
+    data_devolucao DATE
 );
 
 CREATE TABLE especificacao (
