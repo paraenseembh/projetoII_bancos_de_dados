@@ -66,7 +66,7 @@ CREATE TABLE requisicao_de_equipamento (
 CREATE TABLE compra (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fornecedor_id INT NOT NULL,
-    nota_fiscal VARCHAR(120),
+    nota_fiscal VARCHAR(255),
     data_compra DATE NOT NULL,
     previsao_entrega DATE NOT NULL,
     data_chegada DATE,
@@ -118,6 +118,20 @@ CREATE TABLE especificacao (
     cpu VARCHAR(80) NOT NULL,
     gpu VARCHAR(80) NOT NULL,
     CONSTRAINT fk_equipamento FOREIGN KEY (equipamento_id) REFERENCES equipamento(cod_patrimonio)
+);
+
+CREATE TABLE emprestimo (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    funcionario_id INT NOT NULL,
+    equipamento_cod INT NOT NULL,
+    requisicao_id INT NOT NULL,
+    termo_de_comodato VARCHAR(255),
+    data_emprestimo DATE NOT NULL,
+    data_limite DATE,
+    data_devolucao DATE,
+    CONSTRAINT fk_funcionario_emprestimo FOREIGN KEY (funcionario_id) REFERENCES funcionario(id),
+    CONSTRAINT fk_equipamento_emprestimo FOREIGN KEY (equipamento_cod) REFERENCES equipamento(cod_patrimonio),
+    CONSTRAINT fk_requisicao_emprestimo FOREIGN KEY (requisicao_id) REFERENCES requisicao_de_equipamento(id)
 );
 
 CREATE TABLE chamado_de_manutencao (
