@@ -86,12 +86,12 @@ CREATE TABLE tipo_equipamento(
 );
 
 CREATE TABLE disponibilidade_equipamento(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     disponibilidade VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE estado_equipamento(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(25) NOT NULL
 );
 
@@ -116,9 +116,9 @@ CREATE TABLE emprestimo (
     equipamento_cod INT NOT NULL,
     requisicao_id INT NOT NULL,
     termo_de_comodato VARCHAR(255),
-    data_emprestimo DATE NOT NULL,
-    data_limite DATE,
-    data_devolucao DATE,
+    data_emprestimo DATETIME NOT NULL,
+    data_limite DATETIME,
+    data_devolucao DATETIME,
     CONSTRAINT fk_funcionario_emprestimo FOREIGN KEY (funcionario_id) REFERENCES funcionario(id),
     CONSTRAINT fk_equipamento_emprestimo FOREIGN KEY (equipamento_cod) REFERENCES equipamento(cod_patrimonio),
     CONSTRAINT fk_requisicao_emprestimo FOREIGN KEY (requisicao_id) REFERENCES requisicao_de_equipamento(id)
@@ -126,12 +126,12 @@ CREATE TABLE emprestimo (
 
 CREATE TABLE especificacao (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    equipamento_id INT NOT NULL,
+    modelo_equipamento_id INT NOT NULL,
     ram VARCHAR(80) NOT NULL,
     armazenamento VARCHAR(80) NOT NULL,
     cpu VARCHAR(80) NOT NULL,
     gpu VARCHAR(80) NOT NULL,
-    CONSTRAINT fk_equipamento FOREIGN KEY (equipamento_id) REFERENCES equipamento(cod_patrimonio)
+    CONSTRAINT fk_modelo_equipamento FOREIGN KEY (modelo_equipamento_id) REFERENCES modelo_equipamento(id)
 );
 
 CREATE TABLE chamado_de_manutencao (
