@@ -1,10 +1,10 @@
 USE almoxarifado;
 
 INSERT INTO servico (tipo_servico) VALUES ('Fornecedor'), ('Fabricante'), ('Empresa de Assistência');
-INSERT INTO	cargo (nome_cargo) VALUES ('Advogado'), ('Técnico de T.I');
-INSERT INTO modalidade (nome_modalidade) VALUES ('Presencial'), ('Home Office');
+INSERT INTO	cargo (nome_cargo) VALUES ('Advogado'), ('Técnico de T.I'), ('Gestor');
+INSERT INTO modalidade (nome_modalidade) VALUES ('Presencial'), ('Home Office'), ('Híbrido');
 INSERT INTO tipo_equipamento (tipo) VALUES ('Desktop'), ('Notebook'), ('Monitor');
-INSERT INTO disponibilidade_equipamento (disponibilidade) VALUES ('Em uso'), ('Em estoque'), ('Em manutenção');
+INSERT INTO disponibilidade_equipamento (disponibilidade) VALUES ('Em uso'), ('Em estoque'), ('Em manutenção'), ('Reservado'), ('Indisponível');
 INSERT INTO estado_equipamento (estado) VALUES ('Em bom estado'), ('Defeituoso'), ('Descartado');
 
 INSERT INTO empresa_terceirizada (cnpj, nome, telefone, email, endereco, servico_id)
