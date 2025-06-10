@@ -1,0 +1,39 @@
+A Quero Meus Direitos é uma startup que surgiu no ano de 2020, e tem como intuito 
+prestar serviços jurídicos de forma gratuita nas áreas de Direito do Consumidor e Direito 
+Trabalhista.  
+Possui cerca de 80 funcionários, e uma alta rotatividade de funcionários, como é 
+comum no mercado de direito.  
+Por conta dessa alta rotatividade e de seu crescimento acelerado, característico de 
+startups, as técnicas utilizadas anteriormente para se realizar o controle dos equipamentos 
+de t.i. da empresa já não são mais adequadas para o seu tamanho e, por isso, surge a 
+necessidade de um sistema capaz de atender às necessidades da empresa. 
+Sua tarefa é criar o banco de dados para esse almoxarifado, mas, para isso, é 
+necessário entender que: Todo Equipamento tem: Um código de patrimônio, código de 
+compra, número de série, nome do modelo, nome do fabricante, tipo, estado.  
+A Quero Meus Direitos é dividida em vários Setores, que, por sua vez, possuem 
+vários Funcionários.  
+Os Funcionários tem: Código de identificação, cpf, nome, telefone, email. Vários 
+Funcionários utilizam vários Equipamentos e essa relação é chamada de Empréstimo.  
+Os Funcionários podem: Abrir Chamados para Assistência Técnica, e abrir 
+Requisições de Equipamento para o Setor de T.I.. Os Funcionários podem ser Técnicos de 
+T.I. ou Líderes de Setor, e ambos usufruem de todos os direitos de funcionários comuns.  
+Os Técnicos de T.I. prestam assistência aos usuários comuns, abrem Requisições 
+de Compra e gerenciam o estoque e os Equipamentos do almoxarifado.  
+Entradas e saídas. Os Líderes de Setor podem aprovar Requisições de 
+Equipamento.  
+Os Empréstimos possuem: Identificação do funcionário que está utilizando, 
+identificação do equipamento que está sendo utilizado, data do empréstimo, data de 
+devolução, endereço homeoffice.  
+Os Chamados de Manutenção possuem: código de identificação, data de abertura, 
+prazo de cumprimento, status, tipo, descrição do problema, prioridade. 
+A Empresa de Assistência Técnica atende Chamados de Manutenção e possui os 
+atributos: CNPJ, nome, endereço, telefone, email e mantém um Histórico de Transações 
+com o Almoxarifado.  
+As Requisições de Equipamento possuem: identificador, data da requisição, técnico 
+encarregado, status.  
+As Requisições de Compras: num do pedido, data da requisição, técnico 
+encarregado, fornecedor, status. Compra: codigo de compra, num do pedido, data da 
+compra, data de entrega, data de chegada, valor da compra, equipamento obtido, 
+quantidade obtida, valor, fonecedor.  
+Os equipamentos são comprados dos fornecedores, eles tem cnpj/cpf, nome, 
+endereço, telefone. 
