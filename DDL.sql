@@ -78,7 +78,7 @@ CREATE TABLE modelo_equipamento (
     fabricante_id INT NOT NULL,
     nome VARCHAR(80) NOT NULL,
     CONSTRAINT fk_fabricante FOREIGN KEY (fabricante_id) REFERENCES empresa_terceirizada(id)
-);
+); 
 
 CREATE TABLE tipo_equipamento(
 	id INT PRIMARY KEY AUTO_INCREMENT,
