@@ -16,11 +16,13 @@ VALUES
 INSERT INTO setor(nome) VALUES ('Advocacia'), ('T.I');
 
 INSERT INTO funcionario (cpf, setor_id, nome, ativo, telefone, email, modalidade_id, cargo_id) VALUES
-('12345678901', 1, 'João Vitor Totoro', 1, '(31)98765-4321', 'vitin@empresa.com', 1, 3),
-('23456789012', 2, 'Lucas Pará', 1, '(91)99876-1234', 'paraense@empresa.com', 3, 3),
+('12345678901', 1, 'João Vitor Totoro', 1, '(31)98765-4321', 'vitin@empresa.com', 1, 1),
+('23456789012', 2, 'Lucas Pará', 1, '(91)99876-1234', 'paraense@empresa.com', 2, 2),
 ('34567890123', 1, 'Rafael Altafito', 1, '(31)91234-5678', 'altafito@empresa.com', 1, 1),
-('45678901234', 1, 'Heitor da Mota', 1, '(33)93456-7890', 'heitormota@empresa.com', 2, 1),
-('56789012345', 2, 'João Carlos Escoliose', 1, '(21)94567-8901', 'joaocaraujo@empresa.com', 3, 2);
+('45678901234', 1, 'Heitor da Mota', 0, '(33)93456-7890', 'heitormota@empresa.com', 1, 2),
+('56789012345', 2, 'João Carlos Escoliose', 1, '(21)94567-8901', 'joaocaraujo@empresa.com', 2, 1);
+('63640001001', 1, 'Altafito Fialho', 1, '(31)98765-4321', 'altafito.fialho@empresa.com', 1, 3);
+
 
 UPDATE setor SET gerente_id = 1 WHERE id = 1;
 UPDATE setor SET gerente_id = 2 WHERE id = 2;
@@ -30,7 +32,6 @@ INSERT INTO requisicao_de_equipamento
 (1, 5, 'Pedido de Desktop para Heitor', '2025-04-15 09:30:00', '2025-04-30 18:00:00', '2025-04-20 16:20:00'),
 (1, 2, 'Pedido de Notebook para João Vitor', '2025-05-28 14:00:00', '2025-06-03 17:00:00', '2025-05-29 15:30:00'),
 (1, 5, 'Pedido de Monitor para Altafito', '2025-05-30 10:45:00', '2025-06-05 12:00:00', '2025-06-02 13:00:00');
-(1, 5, 'Pedido de mouser para Heitor', '2025-06-07 10:49:00', '2025-07-07 12:00:00', '2025-06-02 13:00:00');
 
 INSERT INTO compra
 (fornecedor_id, nota_fiscal, data_compra, previsao_entrega, data_chegada) VALUES
@@ -41,11 +42,6 @@ INSERT INTO modelo_equipamento (fabricante_id, nome) VALUES
 (2, 'Mec Ultra'),
 (2, 'Mecbook 1'),
 (2, 'IindaPo 2400TI');
-(2, 'MacBook Air M3'),
-(2, 'MacBook Pro 14" M3'),
-(2, 'MacBook Pro 16" M3 Max'),
-(2, 'iMac 24" M3'),
-(2, 'Mac Studio M2 Ultra');
 
 INSERT INTO equipamento (
   cod_patrimonio, modelo_id, compra_id, numero_de_serie,
