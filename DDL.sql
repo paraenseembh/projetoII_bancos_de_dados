@@ -12,10 +12,7 @@ CREATE TABLE empresa_terceirizada (
     nome VARCHAR(50) NOT NULL,
     telefone VARCHAR(14) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    endereco VARCHAR(100) NOT NULL,
-    servico_id INT NOT NULL,
-	CONSTRAINT fk_servico FOREIGN KEY (servico_id) REFERENCES servico(id)
-);
+    endereco VARCHAR(100) NOT NULL);
 
 CREATE TABLE servicos_prestados (
     id INT PRIMARY KEY AUTO AUTO_INCREMENT,
@@ -23,7 +20,7 @@ CREATE TABLE servicos_prestados (
     servico_id INT NOT NULL
     CONSTRAINT fk_empresa FOREIGN KEY (empresa_id) REFERENCES empresa_terceirizada(id),
     CONSTRAINT fk_servico_prestado FOREIGN KEY (servico_id) REFERENCES servico(id)
-)
+);
 
 CREATE TABLE setor (
     id INT PRIMARY KEY AUTO_INCREMENT,
