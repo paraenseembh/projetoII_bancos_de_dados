@@ -17,6 +17,14 @@ CREATE TABLE empresa_terceirizada (
 	CONSTRAINT fk_servico FOREIGN KEY (servico_id) REFERENCES servico(id)
 );
 
+CREATE TABLE servicos_prestados (
+    id INT PRIMARY KEY AUTO AUTO_INCREMENT,
+    empresa_id INT NOT NULL,
+    servico_id INT NOT NULL
+    CONSTRAINT fk_empresa FOREIGN KEY (empresa_id) REFERENCES empresa_terceirizada(id),
+    CONSTRAINT fk_servico_prestado FOREIGN KEY (servico_id) REFERENCES servico(id)
+)
+
 CREATE TABLE setor (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(80) NOT NULL,
