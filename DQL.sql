@@ -106,3 +106,86 @@ HAVING COUNT(e.cod_patrimonio) > ALL (
     GROUP BY te2.tipo
     HAVING te2.tipo <> te.tipo
 );
+
+# Pergunta: Quais equipamentos estão disponíveis para empréstimo e nunca foram emprestados? #
+SELECT 
+    e.cod_patrimonio,
+    me.nome AS modelo,
+    te.tipo,
+    de.disponibilidade,
+    ee.estado
+FROM equipamento e
+JOIN modelo_equipamento me ON e.modelo_id = me.id
+JOIN tipo_equipamento te ON e.tipo_id = te.id
+JOIN disponibilidade_equipamento de ON e.disponibilidade_id = de.id
+JOIN estado_equipamento ee ON e.estado_id = ee.id
+WHERE de.disponibilidade = 'Disponível'
+  AND NOT EXISTS (
+      SELECT 1 FROM emprestimo emp 
+      WHERE emp.equipamento_cod = e.cod_patrimonio
+  )
+ORDER BY te.tipo, me.nome;
+
+# Pergunta: Quais funcionários ativos trabalham em modo presencial e seus respectivos setores? #
+SELECT 
+    f.nome AS funcionario,
+    s.nome AS setor,
+    c.nome_cargo AS cargo,
+    f.telefone,
+    f.email
+FROM funcionario f
+JOIN setor s ON f.setor_id = s.id
+JOIN cargo c ON f.cargo_id = c.id
+JOIN modalidade m ON f.modalidade_id = m.id
+WHERE f.ativo = 1 
+  AND m.nome_modalidade = 'Presencial'
+ORDER BY s.nome, f.nome;
+
+# Pergunta: Quais requisições de equipamento foram abertas mas ainda não foram atendidas por nenhum técnico? #
+SELECT 
+    req.id AS requisicao_id,
+    f.nome AS requerente,
+    s.nome AS setor_requerente,
+    req.descricao,
+    req.data_abertura,
+    DATEDIFF(CURDATE(), req.data_abertura) AS dias_em_aberto
+FROM requisicao_de_equipamento req
+JOIN funcionario f ON req.requerente_id = f.id
+JOIN setor s ON f.setor_id = s.id
+WHERE req.tecnico_id IS NULL
+  AND req.data_conclusao IS NULL
+ORDER BY req.data_abertura;
+
+# Pergunta: Qual é o tempo médio entre a compra e a chegada dos equipamentos por fornecedor? #
+SELECT 
+    et.nome AS fornecedor,
+    COUNT(c.id) AS total_compras,
+    AVG(DATEDIFF(c.data_chegada, c.data_compra)) AS media_dias_entrega,
+    MIN(DATEDIFF(c.data_chegada, c.data_compra)) AS menor_tempo_entrega,
+    MAX(DATEDIFF(c.data_chegada, c.data_compra)) AS maior_tempo_entrega
+FROM compra c
+JOIN empresa_terceirizada et ON c.fornecedor_id = et.id
+WHERE c.data_chegada IS NOT NULL
+GROUP BY et.nome, et.id
+HAVING COUNT(c.id) >= 1
+ORDER BY media_dias_entrega;
+
+# Pergunta: Quais equipamentos têm empréstimos em atraso (passaram da data limite sem devolução)? #
+SELECT 
+    f.nome AS funcionario,
+    f.telefone,
+    s.nome AS setor,
+    e.cod_patrimonio,
+    te.tipo AS tipo_equipamento,
+    emp.data_emprestimo,
+    emp.data_limite,
+    DATEDIFF(CURDATE(), emp.data_limite) AS dias_em_atraso
+FROM emprestimo emp
+JOIN funcionario f ON emp.funcionario_id = f.id
+JOIN setor s ON f.setor_id = s.id
+JOIN equipamento e ON emp.equipamento_cod = e.cod_patrimonio
+JOIN tipo_equipamento te ON e.tipo_id = te.id
+WHERE emp.data_devolucao IS NULL
+  AND emp.data_limite IS NOT NULL
+  AND emp.data_limite < CURDATE()
+ORDER BY dias_em_atraso DESC, f.nome;
