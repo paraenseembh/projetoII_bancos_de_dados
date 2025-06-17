@@ -1,5 +1,6 @@
 ## Pergunta 1
 **Quais equipamentos foram emprestados, por quem, e qual seu tipo, ordenados por data de empréstimo?**
+
 **(junção de 3 ou mais tabelas, com ORDER BY)**
 ```sql
 SELECT 
