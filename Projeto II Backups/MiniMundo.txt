@@ -26,14 +26,12 @@ identificação do equipamento que está sendo utilizado, data do empréstimo, d
 devolução, endereço homeoffice.  
 Os Chamados de Manutenção possuem: código de identificação, data de abertura, 
 prazo de cumprimento, status, tipo, descrição do problema, prioridade. 
-A Empresa de Assistência Técnica atende Chamados de Manutenção e possui os 
-atributos: CNPJ, nome, endereço, telefone, email e mantém um Histórico de Transações 
+As Empresas Terceirizadas podem ser: Assistência Técnica, Fornecedor ou Fabricante.
+Todas possuem os seguintes atributos: CNPJ, nome, endereço, telefone, email e mantém um Histórico de Transações 
 com o Almoxarifado.  
 As Requisições de Equipamento possuem: identificador, data da requisição, técnico 
 encarregado, status.  
 As Requisições de Compras: num do pedido, data da requisição, técnico 
 encarregado, fornecedor, status. Compra: codigo de compra, num do pedido, data da 
 compra, data de entrega, data de chegada, valor da compra, equipamento obtido, 
-quantidade obtida, valor, fonecedor.  
-Os equipamentos são comprados dos fornecedores, eles tem cnpj/cpf, nome, 
-endereço, telefone. 
+quantidade obtida, valor, fonecedor.   
