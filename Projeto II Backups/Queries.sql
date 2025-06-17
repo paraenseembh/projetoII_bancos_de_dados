@@ -1,4 +1,5 @@
 #Pergunta: Quais equipamentos foram emprestados, por quem, e qual seu tipo, ordenados por data de empréstimo?#
+##########junção de 3 ou mais tabelas, com ORDER BY#############
 SELECT 
     f.nome AS funcionario,
     te.tipo AS tipo_equipamento,
@@ -11,6 +12,7 @@ JOIN tipo_equipamento te ON e.tipo_id = te.id
 ORDER BY emp.data_emprestimo DESC;
 
 #Pergunta: Quais chamados de manutenção ainda estão abertos (sem data de conclusão), incluindo empresa responsável e equipamento?#
+###########junção de 3 ou mais tabelas, com ORDER BY e filtros na cláusula WHERE#############
 SELECT 
     ch.id AS chamado_id,
     et.nome AS empresa,
@@ -24,6 +26,7 @@ WHERE ch.data_conclusao IS NULL
 ORDER BY ch.data_abertura DESC;
 
 #Pergunta: Quais equipamentos do tipo "Notebook" foram emprestados entre duas datas?#
+##########junção de 3 ou mais tabelas, usando os operadores LIKE e BETWEEN###########
 SELECT 
     f.nome AS funcionario,
     e.cod_patrimonio,
@@ -38,6 +41,7 @@ WHERE te.tipo LIKE '%Notebook%'
 ORDER BY emp.data_emprestimo;
 
 #Pergunta: Quais equipamentos foram comprados de empresas específicas e ainda não chegaram?#
+#######junção de 3 ou mais tabelas, usando os operadores IN/NOT IN e IS NULL/IS NOT NULL########
 SELECT 
     e.cod_patrimonio,
     me.nome,
@@ -51,6 +55,7 @@ WHERE me.nome IN ('TechPlus', 'InfoSolutions')
 
 
 #Pergunta: Quantos equipamentos existem por tipo?#
+##########junção de 2 ou mais tabelas com GROUP BY, sem HAVING, usando uma função agregada qualquer (MIN, MAX, AVG, SUM, COUNT)Use ORDER BY###########
 SELECT 
     te.tipo,
     COUNT(e.cod_patrimonio) AS quantidade
@@ -60,6 +65,7 @@ GROUP BY te.tipo
 ORDER BY quantidade DESC;
 
 #Pergunta: Quais funcionários realizaram mais de 2 empréstimos?#
+#######junção de 2 ou mais tabelas com GROUP BY e HAVING, usando uma função agregada qualquer (MIN, MAX, AVG, SUM, COUNT)########
 SELECT 
     f.nome,
     COUNT(emp.id) AS total_emprestimos
@@ -70,6 +76,7 @@ HAVING COUNT(emp.id) > 2
 ORDER BY total_emprestimos DESC;
 
 #Pergunta: Quais equipamentos foram comprados na mesma data da última compra registrada?#
+#######subselect sem correlação########
 SELECT cod_patrimonio, compra_id
 FROM equipamento
 WHERE compra_id IN (
@@ -79,6 +86,7 @@ WHERE compra_id IN (
 );
 
 #Pergunta: Quais funcionários trabalham no mesmo setor que seu gerente?#
+#######subselect com correlação########
 SELECT f1.nome
 FROM funcionario f1
 WHERE setor_id IN (
@@ -87,6 +95,7 @@ WHERE setor_id IN (
 );
 
 #Pergunta: Quais empresas já fabricaram algum modelo de equipamento?#
+#######subselect com EXISTS########
 SELECT et.nome
 FROM empresa_terceirizada et
 WHERE EXISTS (
@@ -95,6 +104,7 @@ WHERE EXISTS (
 );
 
 #Pergunta: Quais tipos de equipamento têm quantidade acima de todos os outros?#
+#######junção de 2 ou mais tabelas com GROUP BY, HAVING e ALL########
 SELECT te.tipo, COUNT(e.cod_patrimonio) AS total
 FROM equipamento e
 JOIN tipo_equipamento te ON e.tipo_id = te.id
