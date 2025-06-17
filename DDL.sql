@@ -70,6 +70,13 @@ CREATE TABLE requisicao_de_equipamento (
     CONSTRAINT fk_tecnico FOREIGN KEY (tecnico_id) REFERENCES funcionario(id)
 );
 
+CREATE TABLE modelo_equipamento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fabricante_id INT NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    CONSTRAINT fk_fabricante FOREIGN KEY (fabricante_id) REFERENCES empresa_terceirizada(id)
+);
+
 CREATE TABLE compra (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fornecedor_id INT NOT NULL,
@@ -84,13 +91,6 @@ CREATE TABLE compra (
     CONSTRAINT fk_modelo_equipamento_compra FOREIGN KEY (modelo_equipamento) REFERENCES modelo_equipamento(id)
 );
 
-
-CREATE TABLE modelo_equipamento (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    fabricante_id INT NOT NULL,
-    nome VARCHAR(80) NOT NULL,
-    CONSTRAINT fk_fabricante FOREIGN KEY (fabricante_id) REFERENCES empresa_terceirizada(id)
-); 
 
 CREATE TABLE tipo_equipamento(
 	id INT PRIMARY KEY AUTO_INCREMENT,
