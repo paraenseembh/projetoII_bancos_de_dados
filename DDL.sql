@@ -9,15 +9,17 @@ CREATE TABLE servico(
 CREATE TABLE empresa_terceirizada (
     id INT PRIMARY KEY AUTO_INCREMENT,
     cnpj CHAR(14) UNIQUE NOT NULL,
-    nome VARCHAR(50) NOT NULL,
+    razao_social VARCHAR(200),
+    nome_fantasia VARCHAR(50),
     telefone VARCHAR(14) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    endereco VARCHAR(100) NOT NULL);
+    endereco VARCHAR(100) NOT NULL
+);
 
 CREATE TABLE servicos_prestados (
-    id INT PRIMARY KEY AUTO AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     empresa_id INT NOT NULL,
-    servico_id INT NOT NULL
+    servico_id INT NOT NULL,
     CONSTRAINT fk_empresa FOREIGN KEY (empresa_id) REFERENCES empresa_terceirizada(id),
     CONSTRAINT fk_servico_prestado FOREIGN KEY (servico_id) REFERENCES servico(id)
 );
@@ -71,12 +73,17 @@ CREATE TABLE requisicao_de_equipamento (
 CREATE TABLE compra (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fornecedor_id INT NOT NULL,
+    modelo_equipamento INT NOT NULL,
     nota_fiscal VARCHAR(255),
     data_compra DATE NOT NULL,
     previsao_entrega DATE NOT NULL,
     data_chegada DATE,
-    CONSTRAINT fk_fornecedor FOREIGN KEY (fornecedor_id) REFERENCES empresa_terceirizada(id)
+    valor FLOAT,
+    quantidade_equipamentos INT,
+    CONSTRAINT fk_fornecedor FOREIGN KEY (fornecedor_id) REFERENCES empresa_terceirizada(id),
+    CONSTRAINT fk_modelo_equipamento_compra FOREIGN KEY (modelo_equipamento) REFERENCES modelo_equipamento(id)
 );
+
 
 CREATE TABLE modelo_equipamento (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -131,26 +138,34 @@ CREATE TABLE emprestimo (
 
 CREATE TABLE especificacao (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    modelo_equipamento_id INT NOT NULL,
+    equipamento_id INT NOT NULL,
     ram VARCHAR(80) NOT NULL,
     armazenamento VARCHAR(80) NOT NULL,
     cpu VARCHAR(80) NOT NULL,
     gpu VARCHAR(80) NOT NULL,
-    CONSTRAINT fk_modelo_equipamento FOREIGN KEY (modelo_equipamento_id) REFERENCES modelo_equipamento(id)
+    CONSTRAINT fk_modelo_equipamento FOREIGN KEY (equipamento_id) REFERENCES equipamento(cod_patrimonio)
+);
+
+
+CREATE TABLE tipo_chamado (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(80) NOT NULL
 );
 
 CREATE TABLE chamado_de_manutencao (
     id INT PRIMARY KEY AUTO_INCREMENT,
     requerente_id INT NOT NULL,
     empresa_id INT NOT NULL,
-    equipamento_id INT NOT NULL,
-    tipo VARCHAR(20) NOT NULL,
+    equipamento_cod INT NOT NULL,
+    tipo_id INT NOT NULL,
     prioridade INT NOT NULL,
-    descricao VARCHAR(200) NOT NULL,
+    descricao VARCHAR(2000) NOT NULL,
     data_abertura DATETIME NOT NULL,
     data_limite DATETIME,
     data_conclusao DATETIME,
     CONSTRAINT fk_requerente_chamado FOREIGN KEY (requerente_id) REFERENCES funcionario(id),
-    CONSTRAINT fk_empresa FOREIGN KEY (empresa_id) REFERENCES empresa_terceirizada(id),
-    CONSTRAINT fk_equipamento_chamado FOREIGN KEY (equipamento_id) REFERENCES equipamento(cod_patrimonio)
+    CONSTRAINT fk_empresa_chamado FOREIGN KEY (empresa_id) REFERENCES empresa_terceirizada(id),
+    CONSTRAINT fk_equipamento_chamado FOREIGN KEY (equipamento_cod) REFERENCES equipamento(cod_patrimonio),
+    CONSTRAINT fk_tipo_chamado FOREIGN KEY (tipo_id) REFERENCES tipo_chamado(id)
 );
+
